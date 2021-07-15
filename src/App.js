@@ -80,15 +80,16 @@ export default function App() {
 
   async function constructor() {
     const ethereum = window.ethereum;
-
+    debugger
     window.ethereum.enable();
 
     // Example 1: Log chainId
     ethereum
       .request({ method: "eth_chainId" })
-      .then((chainId) => {
+      .then((chainId, ...rest) => {
         console.log(`hexadecimal string: ${chainId}`);
         console.log(`decimal number: ${parseInt(chainId, 16)}`);
+        console.log(rest)
       })
       .catch((error) => {
         console.error(
@@ -103,7 +104,7 @@ export default function App() {
         params: ["latest", true]
       })
       .then((block) => {
-        console.log(`Block ${block.number}:`, block);
+        // console.log(`Block ${block.number}:`, block);
       })
       .catch((error) => {
         console.error(
@@ -116,7 +117,7 @@ export default function App() {
     ethereum
       .request({ method: "eth_accounts" })
       .then((accounts) => {
-        //console.log(`Accounts:\n${accounts.join("\n")}`);
+        // console.log(`Accounts:\n${accounts.join("\n")}`);
         setIsConnect(accounts.join());
         setAddress(accounts.join());
       })
